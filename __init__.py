@@ -1,26 +1,28 @@
-from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill
-
 import names
+from ovos_workshop.intents import IntentBuilder
+from ovos_workshop.skills import OVOSSkill
 
 __author__ = 'jarbas'
 
-class NamesSkill(MycroftSkill):
-    def __init__(self):
-        super(NamesSkill, self).__init__(name="NamesSkill")
+
+class NamesSkill(OVOSSkill):
 
     def initialize(self):
-
-        name_intent = IntentBuilder("SuggestNameIntent").require("name").build()
+        name_intent = IntentBuilder("SuggestNameIntent").require(
+            "name").build()
         self.register_intent(name_intent, self.handle_name_intent)
 
-        last_name_intent = IntentBuilder("SuggestLastNameIntent").require("lastname").build()
+        last_name_intent = IntentBuilder("SuggestLastNameIntent").require(
+            "lastname").build()
         self.register_intent(last_name_intent, self.handle_last_name_intent)
 
-        female_name_intent = IntentBuilder("SuggestFemaleNameIntent").require("femalename").build()
-        self.register_intent(female_name_intent, self.handle_female_name_intent)
+        female_name_intent = IntentBuilder("SuggestFemaleNameIntent").require(
+            "femalename").build()
+        self.register_intent(female_name_intent,
+                             self.handle_female_name_intent)
 
-        male_name_intent = IntentBuilder("SuggestMaleNameIntent").require("malename").build()
+        male_name_intent = IntentBuilder("SuggestMaleNameIntent").require(
+            "malename").build()
         self.register_intent(male_name_intent, self.handle_male_name_intent)
 
     def handle_name_intent(self, message):
@@ -38,10 +40,3 @@ class NamesSkill(MycroftSkill):
     def handle_male_name_intent(self, message):
         name = names.get_first_name("male")
         self.speak(name)
-
-    def stop(self):
-        pass
-
-
-def create_skill():
-    return NamesSkill()
