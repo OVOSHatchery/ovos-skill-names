@@ -1,6 +1,6 @@
-# mycroft names skill
+# Names skill
 
-says english names, mycroft can now help name your baby
+says english names, OVOS can now help name your characters
 
 # usage
 
